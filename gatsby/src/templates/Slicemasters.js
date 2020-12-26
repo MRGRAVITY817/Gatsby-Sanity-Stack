@@ -1,15 +1,18 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 const SlicemastersPage = ({ data: { person } }) => (
-  <div className="center">
-    <Img fluid={person.image.asset.fluid} />
-    <h2>
-      <span className="mark">{person.name}</span>
-    </h2>
-  </div>
+  <>
+    <SEO title={person.name} image={person.image.src} />
+    <div className="center">
+      <Img fluid={person.image.asset.fluid} />
+      <h2>
+        <span className="mark">{person.name}</span>
+      </h2>
+    </div>
+  </>
 );
 
 export const query = graphql`

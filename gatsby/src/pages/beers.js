@@ -1,7 +1,8 @@
 import React from 'react';
-import Nav from '../components/Nav';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
+import Nav from '../components/Nav';
+import SEO from '../components/SEO';
 
 const BeerGridStyles = styled.div`
   display: grid;
@@ -10,7 +11,7 @@ const BeerGridStyles = styled.div`
 `;
 
 const SingleBeerStyles = styled.div`
-  border : 1px solid var(--grey);
+  border: 1px solid var(--grey);
   padding: 2rem;
   text-align: center;
   img {
@@ -25,11 +26,12 @@ const SingleBeerStyles = styled.div`
 
 const BeersPage = ({ data }) => (
   <>
+    <SEO title={`Beers! We have ${data.beers.nodes.length} in stock`} />
     <h2 className="center">
       We have {data.beers.nodes.length} Beers Available. Dine in Only!
     </h2>
     <BeerGridStyles>
-      {data.beers.nodes.map((beer)=> {
+      {data.beers.nodes.map((beer) => {
         const rating = Math.round(beer.rating.average);
         return (
           <SingleBeerStyles key={beer.id}>
@@ -39,7 +41,7 @@ const BeersPage = ({ data }) => (
             <p title={`${rating} out of 5 stars`}>
               {`⭐`.repeat(rating)}
               <span style={{ filter: `grayscale(100%)` }}>
-                {`⭐`.repeat(5-rating)}
+                {`⭐`.repeat(5 - rating)}
               </span>
               <span>{beer.rating.reviews}</span>
             </p>
@@ -65,6 +67,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 export default BeersPage;
